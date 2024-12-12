@@ -1,7 +1,7 @@
 {
   "required_api_version": "^2.0.0",
   "name": "Http Status Codes",
-  "description": "Quickly look up Http status code explanations.",
+  "description": "Quickly look up Http status code with short descriptions.",
   "developer_name": "FurkanTRN",
   "icon": "images/icon.png",
   "options": {
