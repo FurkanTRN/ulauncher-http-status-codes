@@ -1,4 +1,5 @@
 import json
+import os
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent
@@ -7,8 +8,18 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.OpenUrlAction import OpenUrlAction
 
 def load_http_status_codes():
-    with open('http_status_codes.json', 'r') as file:
-        return json.load(file)
+    try:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(base_path, 'http_status_codes.json')
+        
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        print(f"Error: http_status_codes.json not found at {file_path}")
+        return {}
+    except json.JSONDecodeError:
+        print("Error: Invalid JSON in http_status_codes.json")
+        return {}
 
 class HTTPStatusExtension(Extension):
     def __init__(self):
